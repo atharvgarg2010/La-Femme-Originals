@@ -33,7 +33,7 @@
                 const prodesc = document.getElementById("prodesc").value
                 const proprice = document.getElementById("proprice").value
                 const proimg = document.getElementById("proimg").value
-                fetch("http://localhost:3000/addpro", {
+                fetch("/addpro", {
                     method: "POST",
                     body: JSON.stringify({
                         proname : proname,

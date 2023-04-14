@@ -235,7 +235,7 @@ addser_to_sql = (prodet) => {
     // console.log(result);
   })
 }
-app.get('/cart', (req, res) => {
+app.get('/cart123', (req, res) => {
   getproducts()
   getservices()
   getunder999products()

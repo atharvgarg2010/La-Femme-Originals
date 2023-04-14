@@ -29,7 +29,7 @@
                     .catch(error => console.log('error', error));
 
 
-                fetch("http://localhost:3000/orders", {
+                fetch("/orders", {
                     method: "POST",
                     body: JSON.stringify({
                         orderID : OrderId,

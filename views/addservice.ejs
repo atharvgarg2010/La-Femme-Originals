@@ -28,7 +28,7 @@
             const sdesc = document.getElementById("sdesc")
             const simg = document.getElementById("simg")
             function submitt() {
-                fetch("http://localhost:3000/addser", {
+                fetch("/addser", {
                     method: "POST",
                     body: JSON.stringify({
                         sname : sname.value,

@@ -132,7 +132,9 @@
               <%= det['prodesc']%>
             </p>
           </div>
-          <h1 id="id" style="display: none;"><%= det['proid']%></h1>
+          <h1 id="id" style="display: none;">
+            <%= det['proid']%>
+          </h1>
           <div class="product-price-btn">
             <p><span>
                 <%= det['proprice']%>
@@ -167,7 +169,7 @@
               }
 
             });
-            window.location.hash = "/"
+            window.location.href = "/";
           }
           // function cartw(){
           //   abc = JSON.parse(localStorage.getItem("cart"))
