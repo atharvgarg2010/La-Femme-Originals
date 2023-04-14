@@ -1,0 +1,111 @@
+<%- include('nav');-%>
+    <style>
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 30px;
+            border: none;
+            outline: none;
+            color: black;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .a{
+            float: left;
+        }
+    </style>
+
+    <body>
+        <header class="navbar">
+            <div class="logo"><img src="https://i.imgur.com/OnU6Wrl_d.webp?maxwidth=760&fidelity=grand" alt=""></div>
+            <div class="tabs">
+                <a class="font-sans a" href="/">Home &nbsp; &nbsp;</a>
+                <a class="font-sans a" href="/About">About &nbsp; &nbsp;</a>
+                <a class="font-sans a" href="/products">All Products &nbsp; &nbsp;</a>
+                <a class="font-sans a" href="/under999">Under 999 &nbsp; &nbsp;</a>
+                <a class="font-sans a" href="/under499">Under 499 &nbsp; &nbsp;</a>
+                <!-- <a class="font-sans" href="/Products">Products &nbsp; &nbsp;</a> -->
+
+
+                <!-- <a class="font-sans" href="/Contact">Contact &nbsp; &nbsp;</a> -->
+                <a class="font-sans add" style="display: none;" href="/AddProduct">Add Product &nbsp; &nbsp;</a>
+                <a class="font-sans ser" style="display: none;" href="/Addservice">Add Service &nbsp; &nbsp;</a>
+                <a class="font-sans get" style="display: none;" href="/Getorderss">Get Orders&nbsp; &nbsp;</a>
+                <a class="font-sans log" style="display: none;" href="/" onclick="logout()">Log Out &nbsp; &nbsp;</a>
+<!-- 
+            <div class="dropdown">
+                <button class="dropbtn font-sans">Products
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/products">All Products</a>
+                    <a href="/under999">Under 999</a>
+                    <a href="/under499">Under 499</a>
+                </div> -->
+
+            </div>
+        </div>
+
+            <div class="icons">
+                <a href="/Cart"><i class="fa-sharp fa-solid fa-bag-shopping"></i></a>
+                <i class="bars fa-solid fa-bars" onclick="down()"></i>
+                <i class="x fa-solid fa-xmark" onclick="up()"></i>
+            </div>
+        </header>
+
+    </body>
+
+    <script>
+        console.log(typeof localStorage.Access);
+        localStorageaccess = JSON.parse(localStorage.Access)
+        function logout() {
+            localStorage.removeItem("Access")
+            window.location.href = "http://localhost:3000/";
+        }
+        while (true) {
+
+            if (localStorageaccess == true) {
+                add = document.querySelector(".add")
+                add.style = "display:inline;"
+                ser = document.querySelector(".ser")
+                ser.style = "display:inline;"
+                del = document.querySelector(".log")
+                del.style = "display:inline;"
+                get = document.querySelector(".get")
+                get.style = "display:inline;"
+                break
+            }
+        }
+    </script>

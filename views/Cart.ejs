@@ -1,0 +1,301 @@
+<%- include('nav');-%>
+    <%- include('navbar');-%>
+        <script>
+            var totalordervalue = 0
+
+            window.addEventListener("load", () => {
+                ab = document.getElementById("price")
+                abc = document.getElementById("pricee")
+                console.log(abc);
+                cartProducts = JSON.parse(localStorage.getItem("cart"))
+                console.log(typeof cartProducts);
+                console.log(cartProducts, "Q");
+                cartProducts.map((cartproduct) => {
+                    console.log(cartproduct);
+                    product = document.createElement('div')
+                    product.classList.add("row")
+                    product.classList.add("border-top")
+                    product.classList.add("border-bottom")
+                    console.log(product);
+                    cart = document.querySelector(".cart")
+                    cart.appendChild(product)
+                    console.log(cartproduct['proimg']);
+                    const proimg = cartproduct['proimg']
+                    price = parseInt(cartproduct['proprice'])
+                    totalordervalue += price
+                    console.log(totalordervalue);
+                    // document.getElementById("price").innerHTML = JSON.stringify(totalordervalue)
+                    ab.innerHTML = totalordervalue
+                    abc.innerHTML = totalordervalue+100
+                    localStorage.setItem("finalprice", totalordervalue+100)
+                    abc.innerHTML = localStorage.finalprice
+                    console.log(localStorage.finalprice);
+                    product.innerHTML = `
+                <div class="row main align-items-center flexx">
+                    <div class="col-2"><img class="img-fluid" src="${proimg}"></div>
+                    <div class="col">
+                        <div class="row text-muted">
+                            ${cartproduct['proname']}
+                        </div>
+                        <div class="row"></div>
+                    </div>
+   
+                    <div class="col price">₹ ${cartproduct['proprice']}</div>
+                </div>
+            `
+                })
+                // const price = document.getElementById("price")
+                // price.innerHTML = totalordervalue
+            })
+            function clearr() {
+                localStorage.clear()
+                location.reload()
+                window.location.href = "http://localhost:3000/";
+            }
+            function ok(){
+                console.log(document.getElementById("paymentt").value);
+                const paymentt = document.getElementById("paymentt").value
+                if(paymentt == "COD"){
+                    console.log(localStorage.finalprice);
+                    finalpp = parseInt(localStorage.finalprice)
+                    finalpp+=100
+                    localStorage.setItem("finalprice", finalpp)
+                    console.log(localStorage.finalprice);
+                    document.getElementById("pricee").innerText = localStorage.finalprice
+                }
+                document.getElementById("donee").disabled = true;
+                document.getElementById("paymentt").disabled = true;
+                document.getElementById("donee").style = "background:grey;"
+                localStorage.setItem("PaymentMethod",paymentt)
+            }
+        </script>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-8 cart">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col">
+                                <h4><b>Shopping Cart</b></h4>
+                            </div>
+                            <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
+                        </div>
+                        <button class="btn" onclick="clearr()">Clear Cart</button>
+
+                    </div>
+
+
+
+                    <div class="back-to-shop"><a href="/">&leftarrow;</a><span class="text-muted">Back to shop</span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 summary">
+                    <div>
+                        <h5><b>Summary</b></h5>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col text-right">₹ <span id="price"></span></div>
+                    </div>
+                    <div>
+                        <p>SHIPPING</p>
+                        <select>
+                            <option class="text-muted">Standard-Delivery- ₹ 100</option>
+                        </select>
+                        <p>Payment</p>
+                        <select id="paymentt">
+                            <option class="text-muted" value = "COD">COD - INR 100</option>
+                            <option class="text-muted" value = "UPI">UPI - Free</option>
+                        </select>
+                        <button id="donee" class="btn" onclick="ok()">Done</button>
+                    </div>
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col">TOTAL PRICE</div>
+                        <div class="col text-right">₹ <span id="pricee"></span></div>
+                    </div>
+                    <a href="/checkout"><button class="btn">Checkout</button></a>
+                </div>
+            </div>
+
+        </div>
+
+        <style>
+            .flexx {
+                /* display: flex; */
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .title {
+                margin-bottom: 5vh;
+            }
+
+            .card {
+                margin: auto;
+                max-width: 950px;
+                width: 90%;
+                box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 1rem;
+                border: transparent;
+            }
+
+            @media(max-width:767px) {
+                .card {
+                    margin: 3vh auto;
+                }
+            }
+
+            .cart {
+                background-color: #fff;
+                padding: 4vh 5vh;
+                border-bottom-left-radius: 1rem;
+                border-top-left-radius: 1rem;
+            }
+
+            @media(max-width:767px) {
+                .cart {
+                    padding: 4vh;
+                    border-bottom-left-radius: unset;
+                    border-top-right-radius: 1rem;
+                }
+            }
+
+            .summary {
+                background-color: #ddd;
+                border-top-right-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+                padding: 4vh;
+                color: rgb(65, 65, 65);
+            }
+
+            @media(max-width:767px) {
+                .summary {
+                    border-top-right-radius: unset;
+                    border-bottom-left-radius: 1rem;
+                }
+            }
+
+            .summary .col-2 {
+                padding: 0;
+            }
+
+            .summary .col-10 {
+                padding: 0;
+            }
+
+            .row {
+                margin: 0;
+            }
+
+            .title b {
+                font-size: 1.5rem;
+            }
+
+            .main {
+                margin: 0;
+                padding: 2vh 0;
+                width: 100%;
+            }
+
+            .col-2,
+            .col {
+                padding: 0 1vh;
+            }
+
+            a {
+                padding: 0 1vh;
+            }
+
+            .close {
+                margin-left: auto;
+                font-size: 0.7rem;
+            }
+
+            img {
+                width: 3.5rem;
+            }
+
+            .back-to-shop {
+                margin-top: 4.5rem;
+            }
+
+            h5 {
+                margin-top: 4vh;
+            }
+
+            hr {
+                margin-top: 1.25rem;
+            }
+
+            form {
+                padding: 2vh 0;
+            }
+
+            select {
+                border: 1px solid rgba(0, 0, 0, 0.137);
+                padding: 1.5vh 1vh;
+                margin-bottom: 4vh;
+                outline: none;
+                width: 100%;
+                background-color: rgb(247, 247, 247);
+            }
+
+            input {
+                border: 1px solid rgba(0, 0, 0, 0.137);
+                padding: 1vh;
+                margin-bottom: 4vh;
+                outline: none;
+                width: 100%;
+                background-color: rgb(247, 247, 247);
+            }
+
+            input:focus::-webkit-input-placeholder {
+                color: transparent;
+            }
+
+            .btn {
+                background-color: #000;
+                border-color: #000;
+                color: white;
+                width: 100%;
+                font-size: 0.7rem;
+                margin-top: 4vh;
+                padding: 1vh;
+                border-radius: 0;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+                outline: none;
+                box-shadow: none;
+                color: white;
+                -webkit-box-shadow: none;
+                -webkit-user-select: none;
+                transition: none;
+            }
+
+            .btn:hover {
+                color: white;
+            }
+
+            a {
+                color: black;
+            }
+
+            a:hover {
+                color: black;
+                text-decoration: none;
+            }
+
+            #code {
+                background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+                background-repeat: no-repeat;
+                background-position-x: 95%;
+                background-position-y: center;
+            }
+        </style>

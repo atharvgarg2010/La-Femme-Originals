@@ -1,0 +1,220 @@
+<%- include('nav');-%>
+  <%- include('navbar');-%>
+    <% product.forEach(function(det) { %>
+      <style>
+        .wrapper {
+          display: flex;
+          margin: 20px auto !important;
+
+          height: 420px;
+          width: 654px;
+          border-radius: 7px 7px 7px 7px;
+          /* VIA CSS MATIC https://goo.gl/cIbnS */
+          -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+          -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+          float: left;
+          height: 420px;
+          width: 327px;
+        }
+
+        .product-img img {
+          border-radius: 7px 0 0 7px;
+        }
+
+        .product-info {
+          float: left;
+          height: 420px;
+          width: 327px;
+          border-radius: 0 7px 10px 7px;
+          background-color: #ffffff;
+        }
+
+        .product-text {
+          height: 300px;
+          width: 327px;
+        }
+
+        .product-text h1 {
+          margin: 0 0 0 38px;
+          padding-top: 52px;
+          font-size: 34px;
+          color: #474747;
+        }
+
+        .product-text h1,
+        .product-price-btn p {
+          font-family: "Bentham", serif;
+        }
+
+        .product-text h2 {
+          margin: 0 0 47px 38px;
+          font-size: 13px;
+          font-family: "Raleway", sans-serif;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: #d2d2d2;
+          letter-spacing: 0.2em;
+        }
+
+        .product-text p {
+          height: 125px;
+          margin: 0 0 0 38px;
+          font-family: "Playfair Display", serif;
+          color: #8d8d8d;
+          line-height: 1.7em;
+          font-size: 15px;
+          font-weight: lighter;
+          overflow: hidden;
+        }
+
+        .product-price-btn {
+          height: 103px;
+          width: 327px;
+          margin-top: 17px;
+          position: relative;
+        }
+
+        .product-price-btn p {
+          display: inline-block;
+          position: absolute;
+          top: -13px;
+          height: 50px;
+          font-family: "Trocchi", serif;
+          margin: 0 0 0 38px;
+          font-size: 28px;
+          font-weight: lighter;
+          color: #474747;
+        }
+
+        .product-price-btn button {
+          float: right;
+          display: inline-block;
+          height: 50px;
+          width: 176px;
+          margin: 0 40px 0 16px;
+          box-sizing: border-box;
+          border: transparent;
+          border-radius: 60px;
+          font-family: "Raleway", sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: #ffffff;
+          background-color: #9cebd5;
+          cursor: pointer;
+          outline: none;
+        }
+
+        .product-price-btn button:hover {
+          background-color: #79b0a1;
+        }
+      </style>
+      <div class="wrapper">
+        <div class="product-img">
+          <img src="<%= det['proimg']%>" height="420" width="327" style="
+          object-fit: cover;
+          object-position: center;
+          height: 100%;
+      ">
+        </div>
+        <div class="product-info">
+          <div class="product-text">
+            <h1>
+              <%= det['proname']%>
+            </h1>
+            <h2>by La Femme Originals</h2>
+            <p>
+              <%= det['prodesc']%>
+            </p>
+          </div>
+          <h1 id="id" style="display: none;"><%= det['proid']%></h1>
+          <div class="product-price-btn">
+            <p><span>
+                <%= det['proprice']%>
+              </span>₹</p>
+
+            <button type="button" class="deletebtn" style="display: none;" onclick="deletepro()">Delete Product</button>
+            <button type="button" onclick="addtocart()">Add to Bag <i
+                class="fa-sharp fa-solid fa-bag-shopping"></i></button>
+          </div>
+        </div>
+      </div>
+      <%});%>
+
+        <script>
+
+          var test = '<%- JSON.stringify(product) %>';
+          console.log(JSON.parse(test));
+          var main = JSON.parse(test)
+          if (JSON.parse(localStorage.getItem("Access")) == true) {
+            delbtn = document.querySelector(".deletebtn")
+            delbtn.style = "display:block;"
+          }
+          function deletepro() {
+            const id = document.getElementById("id").innerText
+            fetch("/deletepro", {
+              method: "post",
+              body: JSON.stringify({
+                id: id
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              }
+
+            });
+            window.location.hash = "/"
+          }
+          // function cartw(){
+          //   abc = JSON.parse(localStorage.getItem("cart"))
+          //   console.log(abc);
+          //     fetch("/thanku", {
+          //     method: "post",
+          //     body: JSON.stringify({
+          //       products : abc
+          //     }),
+          //     headers: {
+          //       "Content-type": "application/json; charset=UTF-8"
+          //     }
+
+          //   });
+
+          // }
+          //   location.reload();
+          //   alert("Please Reload !!!")
+          //   id = document.getElementById("input").setAttribute('value', cart);
+
+
+          //   console.log(JSON.parse(cart));
+          //   cartt = []
+          //   if (localStorage.getItem("cart") != null) {
+          //     JSON.parse(localStorage.getItem("cart")).forEach(ele => {
+          //       cartt.push(ele)
+
+          //     });
+          //     console.log(cartt);
+          //   }
+
+
+          if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', JSON.stringify([]));
+            console.log(localStorage.cart);
+          } else {
+            console.log(localStorage.cart);
+          }
+          function addtocart() {
+            // Get the current cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            console.log(cart);
+            // Add the item to the cart
+            cart.push(main[0]);
+
+            // Save the updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+          }
+
+        </script>
