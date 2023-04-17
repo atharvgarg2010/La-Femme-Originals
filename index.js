@@ -240,7 +240,7 @@ app.get('/hellohello', (req, res) => {
   getunder499products()
   // console.log(resultt[0]['htitle']);
   // res.send("D")
-  res.render("cart")
+  res.render("Cart")
 })
 app.get('/AddProduct', (req, res) => {
   getproducts()
