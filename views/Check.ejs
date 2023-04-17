@@ -47,15 +47,15 @@ width: max-content;
             function check() {
                 a = '<%= password%>'
                 b = '<%= emailid %>'
-                console.log(a);
-                console.log(b);
+                // console.log(a);
+                // console.log(b);
                 email = document.getElementById("email")
                 password = document.getElementById("password")
                 if (password.value == a && email.value == b) {
                     localStorage.setItem("Access" , true)
                     alert("Access Confirmed")
                 }else{
-                    console.log("Hello");
+                    // console.log("Hello");
                     alert("Access Denied")
 
                 }

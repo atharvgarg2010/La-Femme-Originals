@@ -151,7 +151,7 @@
         <script>
 
           var test = '<%- JSON.stringify(product) %>';
-          console.log(JSON.parse(test));
+          // console.log(JSON.parse(test));
           var main = JSON.parse(test)
           if (JSON.parse(localStorage.getItem("Access")) == true) {
             delbtn = document.querySelector(".deletebtn")
@@ -173,7 +173,7 @@
           }
           // function cartw(){
           //   abc = JSON.parse(localStorage.getItem("cart"))
-          //   console.log(abc);
+          //   // console.log(abc);
           //     fetch("/thanku", {
           //     method: "post",
           //     body: JSON.stringify({
@@ -191,27 +191,27 @@
           //   id = document.getElementById("input").setAttribute('value', cart);
 
 
-          //   console.log(JSON.parse(cart));
+          //   // console.log(JSON.parse(cart));
           //   cartt = []
           //   if (localStorage.getItem("cart") != null) {
           //     JSON.parse(localStorage.getItem("cart")).forEach(ele => {
           //       cartt.push(ele)
 
           //     });
-          //     console.log(cartt);
+          //     // console.log(cartt);
           //   }
 
 
           if (!localStorage.getItem('cart')) {
             localStorage.setItem('cart', JSON.stringify([]));
-            console.log(localStorage.cart);
+            // console.log(localStorage.cart);
           } else {
-            console.log(localStorage.cart);
+            // console.log(localStorage.cart);
           }
           function addtocart() {
             // Get the current cart from localStorage
             let cart = JSON.parse(localStorage.getItem('cart'));
-            console.log(cart);
+            // console.log(cart);
             // Add the item to the cart
             cart.push(main[0]);
 

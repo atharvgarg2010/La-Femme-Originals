@@ -6,30 +6,30 @@
             window.addEventListener("load", () => {
                 ab = document.getElementById("price")
                 abc = document.getElementById("pricee")
-                console.log(abc);
+                // console.log(abc);
                 cartProducts = JSON.parse(localStorage.getItem("cart"))
-                console.log(typeof cartProducts);
-                console.log(cartProducts, "Q");
+                // console.log(typeof cartProducts);
+                // console.log(cartProducts, "Q");
                 cartProducts.map((cartproduct) => {
-                    console.log(cartproduct);
+                    // console.log(cartproduct);
                     product = document.createElement('div')
                     product.classList.add("row")
                     product.classList.add("border-top")
                     product.classList.add("border-bottom")
-                    console.log(product);
+                    // console.log(product);
                     cart = document.querySelector(".cart")
                     cart.appendChild(product)
-                    console.log(cartproduct['proimg']);
+                    // console.log(cartproduct['proimg']);
                     const proimg = cartproduct['proimg']
                     price = parseInt(cartproduct['proprice'])
                     totalordervalue += price
-                    console.log(totalordervalue);
+                    // console.log(totalordervalue);
                     // document.getElementById("price").innerHTML = JSON.stringify(totalordervalue)
                     ab.innerHTML = totalordervalue
                     abc.innerHTML = totalordervalue+100
                     localStorage.setItem("finalprice", totalordervalue+100)
                     abc.innerHTML = localStorage.finalprice
-                    console.log(localStorage.finalprice);
+                    // console.log(localStorage.finalprice);
                     product.innerHTML = `
                 <div class="row main align-items-center flexx">
                     <div class="col-2"><img class="img-fluid" src="${proimg}"></div>
@@ -53,14 +53,14 @@
                 window.location.href = "/";
             }
             function ok(){
-                console.log(document.getElementById("paymentt").value);
+                // console.log(document.getElementById("paymentt").value);
                 const paymentt = document.getElementById("paymentt").value
                 if(paymentt == "COD"){
-                    console.log(localStorage.finalprice);
+                    // console.log(localStorage.finalprice);
                     finalpp = parseInt(localStorage.finalprice)
                     finalpp+=100
                     localStorage.setItem("finalprice", finalpp)
-                    console.log(localStorage.finalprice);
+                    // console.log(localStorage.finalprice);
                     document.getElementById("pricee").innerText = localStorage.finalprice
                 }
                 document.getElementById("donee").disabled = true;

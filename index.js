@@ -24,7 +24,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  // console.log(`Example app listening on port ${port}`)
 })
 // Mysql setup
 var con = mysql.createConnection({
@@ -36,47 +36,47 @@ var con = mysql.createConnection({
 // Mysql connection check
 con.connect(function (err) {
   if (err) throw err;
-  console.log("Connected!");
+  // console.log("Connected!");
 });
 
 // About 
 function getservices() {
   con.query("select * from about", function (err, result) {
     if (err) throw err;
-    // console.log(result);
+    // // console.log(result);
     a = result
   })
-  console.log("Bhat");
+  // console.log("Bhat");
 }
 
 con.query("select * from home", function (err, result) {
   if (err) throw err;
-  // console.log(result);
+  // // console.log(result);
   resultt = result
-  // console.log(resultt);
+  // // console.log(resultt);
 })
 function getproducts() {
   con.query("select * from products", function (err, result) {
     if (err) throw err;
-    // console.log(result);
+    // // console.log(result);
     productss = result
-    console.log(productss);
+    // console.log(productss);
     productss.forEach(pro => {
-      console.log(pro['proprice']);
+      // console.log(pro['proprice']);
     });
   })
 }
 function getunder999products() {
   con.query("SELECT * FROM femme.products where proprice > 500 and proprice<1000;", function (err, result) {
     if (err) throw err;
-    console.log(result, "A");
+    // console.log(result, "A");
     under999pro = result
   })
 }
 function getunder499products() {
   con.query("SELECT * FROM femme.products where proprice < 500;", function (err, result) {
     if (err) throw err;
-    console.log(result, "A");
+    // console.log(result, "A");
     under499pro = result
   })
 }
@@ -85,7 +85,7 @@ app.get('/', (req, res) => {
   getproducts()
   getservices()
   getunder499products()
-  // console.log(a);
+  // // console.log(a);
   // res.send("D")
   res.render("home", { title: resultt[0]['htitle'], subtitle: resultt[0]['hdesc'], Scontent: a, products: productss })
 })
@@ -94,7 +94,7 @@ app.get('/checkout', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(a);
+  // // console.log(a);
   // res.send("D")
   res.render('checkout')
 })
@@ -104,8 +104,8 @@ app.get('/About', (req, res) => {
   getunder999products()
   getunder499products()
   res.cookie("name", "value")
-  console.log('Cookies: ', req.cookies)
-  // console.log(resultt[0]['htitle']);
+  // console.log('Cookies: ', req.cookies)
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("About", { Scontent: a })
 })
@@ -115,7 +115,7 @@ app.get('/Products', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("Products", { products: productss })
 })
@@ -124,9 +124,9 @@ app.get('/under999', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
-  console.log(under999pro, "SSSSSSSSSSSSSss");
+  // console.log(under999pro, "SSSSSSSSSSSSSss");
   res.render("under999", { products: under999pro })
 })
 app.get('/under499', (req, res) => {
@@ -134,9 +134,9 @@ app.get('/under499', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
-  console.log(under499pro, "SSSSSSSSSSSSSss");
+  // console.log(under499pro, "SSSSSSSSSSSSSss");
   res.render("under999", { products: under499pro })
 })
 var resulttt = []
@@ -157,10 +157,10 @@ app.post('/thanku', async (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  console.log(req.body);
+  // console.log(req.body);
   store.setItem("cart", req.body)
   cart[0] = req.body
-  console.log(cart[0]);
+  // console.log(cart[0]);
   res.render("cart", { products: req.body })
 
 })
@@ -171,7 +171,7 @@ app.post('/getorderbyid', async (req, res) => {
   getunder499products()
   con.query(`SELECT * FROM orders where orderid = '${req.body['orderid']}';`, function (err, result) {
     if (err) throw err;
-    console.log(result, "Aaaaaaaaaaaaaaa");
+    // console.log(result, "Aaaaaaaaaaaaaaa");
     orderss = result
   })
   res.send("done")
@@ -182,14 +182,14 @@ app.get('/ordersssa', async (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  console.log(orderss, "aaaaaaagggggggggggggg");
+  // console.log(orderss, "aaaaaaagggggggggggggg");
   res.render("getorderss", {orderdet : orderss})
 
 })
 function deletepro(id) {
   con.query(`DELETE FROM products WHERE proid = '${id['id']}';`, function (err, result) {
     if (err) throw err;
-    console.log(result, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    // console.log(result, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
   })
 }
@@ -199,7 +199,7 @@ app.post('/deletepro', async (req, res) => {
   getunder499products()
   getunder999products()
   deletepro(req.body)
-  console.log(req.body, "AAAAAAAaaaaaaaaaaaaaathrvg");
+  // console.log(req.body, "AAAAAAAaaaaaaaaaaaaaathrvg");
   res.send("done")
 
 })
@@ -208,29 +208,29 @@ const addproduct_to_sql = (prodet) => {
   prodesc = prodet['prodesc']
   proprice = prodet['proprice']
   proimg = prodet['proimg']
-  console.log(proname);
-  console.log(prodesc);
-  console.log(proprice);
-  console.log(proimg);
+  // console.log(proname);
+  // console.log(prodesc);
+  // console.log(proprice);
+  // console.log(proimg);
   const id = crypto.randomBytes(3).toString("hex");
 
-  console.log(id);
+  // console.log(id);
   con.query(`INSERT INTO products(proname, prodesc, proprice, proimg, proid) VALUES ('${proname}', '${prodesc}', '${proprice}', '${proimg}', '${id}')`, function (err, result) {
     if (err) throw err;
-    // console.log(result);
+    // // console.log(result);
   })
 }
 addser_to_sql = (prodet) => {
   proname = prodet['sname']
   prodesc = prodet['sdesc']
   proimg = prodet['simg']
-  console.log(proname);
-  console.log(prodesc);
-  console.log(proimg);
+  // console.log(proname);
+  // console.log(prodesc);
+  // console.log(proimg);
 
   con.query(`INSERT INTO about(Stitle, Sdesc, Simg) VALUES ('${proname}', '${prodesc}', '${proimg}')`, function (err, result) {
     if (err) throw err;
-    // console.log(result);
+    // // console.log(result);
   })
 }
 app.get('/hellohello', (req, res) => {
@@ -238,7 +238,7 @@ app.get('/hellohello', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("Cart")
 })
@@ -247,7 +247,7 @@ app.get('/AddProduct', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("addproduct")
 })
@@ -256,7 +256,7 @@ app.get('/Addservice', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("addservice")
 })
@@ -265,12 +265,12 @@ app.get('/getorderssss', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  console.log(orderbyid, "aaaaaaaaaaaaaaaaaaa");
+  // console.log(orderbyid, "aaaaaaaaaaaaaaaaaaa");
   // res.send("D")
   res.render("getorderss", {orderdet : orderbyid[0]})
 })
 app.post('/addpro', (req, res) => {
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   addproduct_to_sql(req.body)
   getservices()
@@ -279,7 +279,7 @@ app.post('/addpro', (req, res) => {
   res.send("done")
 })
 app.post('/addser', (req, res) => {
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   addser_to_sql(req.body)
   getservices()
@@ -290,23 +290,23 @@ app.post('/addser', (req, res) => {
 })
 
 app.post('/orders', (req, res) => {
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")zs
   getservices()
   getunder999products()
   getunder499products()
   const propro = req.body['products']
-  console.log(typeof propro, "Aggggggggg");
+  // console.log(typeof propro, "Aggggggggg");
   propropro = JSON.stringify(propro)
   const propropro1 = {'id':"D"}
-  console.log(propropro1);
+  // console.log(propropro1);
   sql = 'INSERT INTO orders(products,orderid) VALUES ?'
   const values = [
     [propro, req.body['orderID']]
   ]
   con.query(sql,[values], function (err, result) {
     if (err) throw err;
-    // console.log(result);
+    // // console.log(result);
   })
   res.send("done")
 })
@@ -315,7 +315,7 @@ app.get('/check', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("Check", { emailid: "lafemmeoriginals@gmail.com", password: "Atharvgarg" })
 })
@@ -324,7 +324,7 @@ app.get('/getorderss', (req, res) => {
   getservices()
   getunder999products()
   getunder499products()
-  // console.log(resultt[0]['htitle']);
+  // // console.log(resultt[0]['htitle']);
   // res.send("D")
   res.render("GetOrder")
 })

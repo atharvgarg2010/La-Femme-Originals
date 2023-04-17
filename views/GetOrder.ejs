@@ -3,7 +3,7 @@
     <script>
       function submitt() {
         const orderid = document.getElementById("orderID").value
-        console.log(orderid);
+        // console.log(orderid);
         fetch("/getorderbyid", {
                     method: "POST",
                     body: JSON.stringify({
