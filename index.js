@@ -2,9 +2,7 @@
 var mysql = require('mysql');
 const express = require('express')
 var cookieParser = require('cookie-parser')
-var LocalStorage = require('node-localstorage').LocalStorage,
   // variables
-  store = new LocalStorage('./scratch');
 const app = express()
 const port = 3000
 a = []
@@ -235,7 +233,7 @@ addser_to_sql = (prodet) => {
     // console.log(result);
   })
 }
-app.get('/cart123', (req, res) => {
+app.get('/hellohello', (req, res) => {
   getproducts()
   getservices()
   getunder999products()
