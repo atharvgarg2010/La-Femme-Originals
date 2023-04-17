@@ -242,7 +242,7 @@ app.get('/cart123', (req, res) => {
   getunder499products()
   // console.log(resultt[0]['htitle']);
   // res.send("D")
-  res.render("cart", { products: cart })
+  res.render("cart")
 })
 app.get('/AddProduct', (req, res) => {
   getproducts()
